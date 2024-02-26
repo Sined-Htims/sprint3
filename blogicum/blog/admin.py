@@ -1,12 +1,15 @@
 from django.contrib import admin
 from .models import Category, Location, Post
 
+admin.site.register(Location)
+
 
 class PostInline(admin.StackedInline):
     model = Post
     extra = 1
 
 
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """Модель категории для изменения в админ-зоне"""
 
@@ -23,6 +26,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title',)
 
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     """Модель публикации для изменения в админ-зоне"""
 
@@ -41,8 +45,3 @@ class PostAdmin(admin.ModelAdmin):
     )
     list_filter = ('category',)
     search_fields = ('title',)
-
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Location)
-admin.site.register(Post, PostAdmin)
